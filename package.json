@@ -1,0 +1,22 @@
+{
+    "name": "projetjs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "start": "node index.js",
+        "test": "mocha"
+    },
+    "xo": {
+        "envs": [
+            "mocha"
+        ],
+        "space": 2,
+        "prettier": true
+    },
+    "devDependencies": {
+        "chai": "^4.2.0",
+        "chai-as-promised": "^7.1.1",
+        "mocha": "^6.0.2"
+    }
+}
