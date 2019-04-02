@@ -1,11 +1,11 @@
 const { Divinity } = require('./divinity');
 const { City } = require('./city');
-Zeus = new City("Planete A", "Zeus");
-Kratos = new City("Planete B", "Kratos");
-Zeus.giveShit();
-Kratos.giveShit();
+A = new City("Planete A", "A");
+B = new City("Planete B", "B");
+A.giveShit();
+B.giveShit();
 
 setInterval(() => {
-    Zeus.showShit();
-    Kratos.showShit();
+    A.showShit();
+    B.showShit();
 }, 1000);
