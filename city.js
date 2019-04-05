@@ -1,5 +1,20 @@
 const { Divinity } = require('./divinity');
-const { Troupes } = require('./troupes')
+const { Troupes } = require('./troupes');
+const { Miner } = require('./miner');
+const { Mine } = require('./mine')
+const { Farm } = require('./farm')
+const { Farmer } = require('./famer')
+
+
+
+// TODO 
+/**
+ *  Function o count the number of element of each class using ramda 
+ *  Function to collect the gold and the corn 
+ * 
+ * 
+ * 
+ */
 
 class City {
     constructor(name, divinityName) {
@@ -51,8 +66,6 @@ class City {
             this.corn_ = 0;
             this.gold_ = 0;
         }
-    }
-
     getShit(s) {
         this.corn_ += Math.floor(s.corn);
         this.gold_ += Math.floor(s.gold);
