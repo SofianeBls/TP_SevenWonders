@@ -1,9 +1,7 @@
-const {Personnage} = require("./personnage")
-
+const { Personnage } = require("./personnage");
 
 class Miner extends Personnage {
-
-    constructor(id, mine, goldFoundMax){
+    constructor(id, mine, goldFoundMax) {
         super(id);
         this.goldFoundMax_ = goldFoundMax;
         this.yield_ = 0;
@@ -11,31 +9,25 @@ class Miner extends Personnage {
         this.init();
     }
 
-
-    init(){
+    init() {
         this.gaiaInterval_ = setInterval(() => {
             this.updateYield();
-        }, (1200/365));
-        this.gaiaInterval_ = setInterval(() => {
             this.work();
-        }, (1200/365));
+        }, 1200 / 365);
     }
 
-
-    updateYield(){
+    updateYield() {
         this.yield_ = Math.random();
     }
 
-    work(){
+    work() {
         let goldFounded = this.yield_ * this.goldFoundMax_;
-        this.mine_.gold = goldFounded; 
+        this.mine_.gold = goldFounded;
     }
 
-    get age(){
-      this.age_;
+    get age() {
+        this.age_;
     }
-
 }
 
-
-module.exports = { Miner }
+module.exports = { Miner };

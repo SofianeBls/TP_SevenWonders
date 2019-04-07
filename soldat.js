@@ -13,7 +13,7 @@ class Soldat {
                     this.injured_ = false;
                 }, 600);
             }
-        }, 1200);
+        }, 240);
     }
     died() {
         this.died_ = true;

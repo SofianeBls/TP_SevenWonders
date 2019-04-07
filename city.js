@@ -29,26 +29,26 @@ class City {
         this.pickupGoldandCorn = setInterval(() => {
             this.pickUpCorn();
             this.pickUpGold();
-        }, 5000);
+        }, 1200);
         this.newGeneration = setInterval(() => {
             this.createNewMinerGeneration();
             this.createNewFarmerGeneration();
-        }, 6500);
+        }, 2400);
         this.createFarm();
         this.createMine();
-
-        if (!this.cityFallen) {
-            this.divinity_.init();
-            this.divinity_.worldEvents.on("favor", shit => this.getShit(shit));
-            this.divinity_.worldEvents.on("blessing", shit => this.getShit(shit));
-            this.IA = setInterval(() => {
+        this.divinity_.init();
+        this.divinity_.worldEvents.on("favor", shit => this.getShit(shit));
+        this.divinity_.worldEvents.on("blessing", shit => this.getShit(shit));
+        this.IA = setInterval(() => {
+            if (!this.cityFallen) {
                 if (Math.random() > 0.5) this.makeSoldiers(1000);
                 else if (Math.random() > 0.7) this.giveShit();
-                else if (Math.random() > 0.9) this.trade(this.world_.randomCity(this));
-                else if (Math.random() > 0.99)
+                else if (Math.random() > 0.75 && !this.world_.onWar)
+                    this.trade(this.world_.randomCity(this));
+                else if (Math.random() > 0.79 && !this.world_.onWar)
                     this.Attack(this.world_.randomCity(this));
-            }, 1200);
-        }
+            } else clearInterval(this.IA);
+        }, 1200);
     }
     trade(A) {
         if (Math.random() > 0.5) {
