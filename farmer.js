@@ -1,14 +1,10 @@
-
-const { Personnage } = require('./personnage');
-
-
+const { Personnage } = require("./personnage");
 
 class Farmer extends Personnage {
-
-    constructor(id, farm, cornPickUpMax){
+    constructor(id, farm, cornPickUpMax) {
         super(id);
         this.farm_ = farm;
-        this.yield_ = 0; 
+        this.yield_ = 0;
         this.cornPickUpMax_ = cornPickUpMax;
         this.init();
     }
@@ -22,8 +18,8 @@ class Farmer extends Personnage {
         }, (1200/365));
     }
 
-    updateYield(){
-        this.yield_ = Math.random();  
+    updateYield() {
+        this.yield_ = Math.random();
     }
 
     work(){
@@ -36,13 +32,10 @@ class Farmer extends Personnage {
             clearInterval(this.workInterval_);
         }
     }
-    
-    get age(){
-      this.age_;
+
+    get age() {
+        this.age_;
     }
-
 }
-
-
 
 module.exports = { Farmer };

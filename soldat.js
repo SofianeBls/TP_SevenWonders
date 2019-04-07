@@ -8,10 +8,16 @@ class Soldat {
     init() {
         this.gaiaInterval_ = setInterval(() => {
             this.age++;
-        }, 12);
+            if (this.injured) {
+                setTimeout(function() {
+                    this.injured_ = false;
+                }, 600);
+            }
+        }, 240);
     }
     died() {
         this.died_ = true;
+        clearInterval(this.gaiaInterval_);
     }
     isDead() {
         return this.died_;

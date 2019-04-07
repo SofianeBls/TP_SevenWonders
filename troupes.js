@@ -1,19 +1,28 @@
-const { Soldat } = require('./soldat');
-const R = require('ramda');
+const { Soldat } = require("./soldat");
+const R = require("ramda");
 class Troupes {
     constructor() {
         this.soldats_ = [];
-        this.price_g_ = 80;
-        this.price_c_ = 100;
+        this.price_g_ = 500;
+        this.price_c_ = 1000;
+        this.addSoldier();
+        this.init();
     }
+
+    init() {
+        this.gaiaInterval_ = setInterval(() => {
+            this.soldats_ = R.filter(x => x.age_ < 60, this.soldats_);
+        }, 1300);
+    }
+
     addSoldier() {
-        this.soldats_.push(new Soldat())
+        this.soldats_.push(new Soldat());
     }
     numberOfSoldier() {
         return this.soldats_.length;
     }
     validArmySize() {
-        return R.length(R.filter(x => x.injured() == 0, this.soldats_))
+        return R.length(R.filter(x => x.injured() == 0, this.soldats_));
     }
     Army() {
         return R.filter(x => x.injured() == 0, this.soldats_);
@@ -22,16 +31,11 @@ class Troupes {
         let a = this.Army();
         for (let i = 0; i < nbOfSoldier; i++) {
             if (Math.random() > 0.5) {
-                if (Math.random() > 0.5)
-                    a[i].getInjured();
-                else
-                    a[i].died();
+                if (Math.random() > 0.5) a[i].getInjured();
+                else a[i].died();
             }
         }
-        for (let i = 0; i < this.soldats_.length; i++) { /// peut etre possible de le faire avec ramda
-            if (this.soldats_[i].isDead())
-                this.soldats_.splice(i, 1);
-        }
+        this.soldats_ = R.filter(x => !x.isDead(), this.soldats_);
     }
 }
 
