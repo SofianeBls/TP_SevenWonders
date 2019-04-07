@@ -8,6 +8,7 @@ class Divinity {
         this.worldEvents_ = new EventEmitter();
         this.timeFactor_ = timeFactor || 600;
     }
+  
 
     init() {
         this.gaiaInterval_ = setInterval(() => {

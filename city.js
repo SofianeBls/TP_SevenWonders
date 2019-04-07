@@ -1,5 +1,10 @@
 const { Divinity } = require("./divinity");
 const { Troupes } = require("./troupes");
+const { Miner } = require("./miner");
+const { Mine } = require("./mine");
+const { Farm } = require("./farm");
+const { Farmer } = require("./farmer");
+const R = require("ramda");
 
 class City {
     constructor(name, divinityName, World) {
@@ -12,10 +17,26 @@ class City {
         this.cityFallen = false;
         this.world_.addCity(this);
         this.world_.addDivinity(this);
+        this.farm_ = [];
+        this.farmer_ = [];
+        this.mine_ = [];
+        this.miner_ = [];
+        this.troupes_ = new Troupes();
         this.init();
     }
 
     init() {
+        this.gaiaInterval_ = setInterval(() => {
+            this.pickUpCorn();
+            this.pickUpGold();
+        }, 5000);
+        this.newGeneration = setInterval(() => {
+            this.createNewMinerGeneration();
+            this.createNewFarmerGeneration();
+        }, 6500);
+        this.createFarm();
+        this.createMine();
+
         if (!this.cityFallen) {
             this.divinity_.init();
             this.divinity_.worldEvents.on("favor", shit => this.getShit(shit));
@@ -146,11 +167,72 @@ class City {
     showShit() {
         if (!this.cityFallen)
             console.log(
-                `${this.name_}: C ${this.corn_}, G ${
+                `${this.name_}: C ${Math.floor(this.corn_)}, G ${Math.floor(
           this.gold_
-        }, Soldiers ${this.troupes_.validArmySize()}`
+        )}, Soldiers ${this.troupes_.validArmySize()}, Farmer ${
+          this.farmer_.length
+        }, Miner ${this.miner_.length}`
             );
         else console.log(`${this.name_} has fallen`);
+    }
+    createFarm() {
+        for (var i = 0; i < 5; i++) {
+            var farm = new Farm();
+            this.farm_.push(farm);
+            for (var j = 0; j < 10; j++) {
+                this.farmer_.push(new Farmer(i * j, farm, 30));
+            }
+        }
+    }
+
+    createMine() {
+        for (var i = 0; i < 5; i++) {
+            var mine = new Mine();
+            this.mine_.push(mine);
+            for (var j = 0; j < 10; j++) {
+                this.miner_.push(new Miner(i * j, mine, 30));
+            }
+        }
+    }
+
+    createNewFarmerGeneration() {
+        const numberFarmerRetreat = R.length(
+            R.filter(x => x.age <= 60, this.farmer_)
+        );
+        this.farmer_ = R.filter(x => x.age <= 60, this.farmer_);
+        for (var i = 0; i < this.farm_.length; i++) {
+            var farm = this.farm_[i];
+            var farmer = new Farmer(i, farm, 30);
+            this.farmer_.push(farmer);
+            this.gold_ -= 15;
+            this.corn_ -= 20;
+        }
+    }
+
+    createNewMinerGeneration() {
+            const numberFarmerRetreat = R.length(
+                R.filter(x => x.age <= 60, this.miner_)
+            );
+            this.miner_ = R.filter(x => x.age <= 60, this.miner_);
+            for (var i = 0; i < this.mine_.length; i++) {
+                var mine = this.mine_[i];
+                var miner = new Miner(i, mine, 30);
+                this.miner_.push(miner);
+                this.gold_ -= 10;
+                this.corn_ -= 20;
+            }
+        }
+        // function used to fetch all the corn and all the gold in the city
+    pickUpCorn() {
+        for (var i = 0; i < this.farm_.length; i++) {
+            this.corn_ += this.farm_[i].pickUp();
+        }
+    }
+
+    pickUpGold() {
+        for (var i = 0; i < this.mine_.length; i++) {
+            this.gold_ += this.mine_[i].pickUp();
+        }
     }
 }
 
