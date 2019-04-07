@@ -21,7 +21,6 @@ class City {
         this.farmer_ = [];
         this.mine_ = [];
         this.miner_ = [];
-        this.troupes_ = new Troupes();
         this.init();
     }
 
@@ -33,14 +32,8 @@ class City {
         this.newGeneration = setInterval(() => {
             this.createNewMinerGeneration();
             this.createNewFarmerGeneration();
-           }, (3000));
-      
-        
-        
-        this.pickUpGoldInterval_ = setInterval(() => {
-            this.pickUpGold();
-        }, (5000));
-         
+        }, 3000);
+
         this.createFarm();
         this.createMine();
         this.divinity_.init();
@@ -58,7 +51,7 @@ class City {
         }, 1200);
     }
 
-      // function used to fetch all the corn and all the gold in the city
+    // function used to fetch all the corn and all the gold in the city
     pickUpCorn() {
         for (var i = 0; i < this.farm_.length; i++) {
             this.corn_ += this.farm_[i].pickUp();
@@ -71,68 +64,61 @@ class City {
         }
     }
 
-    createFarm(){
-       for (var i = 0; i < 5; i++){
-           var farm = new Farm();
-           this.farm_.push(farm);
-           for (var j = 0; j < 10; j++)
-           {
-               this.farmer_.push(new Farmer(i*j, farm, 30));
-           }
-       }
-    }
-    
-    createMine(){
-       for (var i = 0; i < 5; i++){
-           var mine = new Mine();
-           this.mine_.push(mine);
-           for (var j = 0; j < 10; j++)
-           {
-               this.miner_.push(new Miner(i*j, mine, 30));
-           }
-       }
+    createFarm() {
+        for (var i = 0; i < 5; i++) {
+            var farm = new Farm();
+            this.farm_.push(farm);
+            for (var j = 0; j < 10; j++) {
+                this.farmer_.push(new Farmer(i * j, farm, 30));
+            }
+        }
     }
 
-    canMakeNewWorker(){
-        return (this.gold_ - 15 >= 0) && (this.gold_ - 20 >= 0);
+    createMine() {
+        for (var i = 0; i < 5; i++) {
+            var mine = new Mine();
+            this.mine_.push(mine);
+            for (var j = 0; j < 10; j++) {
+                this.miner_.push(new Miner(i * j, mine, 30));
+            }
+        }
     }
 
-    createNewFarmerGeneration(){
+    canMakeNewWorker() {
+        return this.gold_ - 15 >= 0 && this.gold_ - 20 >= 0;
+    }
+
+    createNewFarmerGeneration() {
         var oldFarmer = R.filter(x => x.isOld() == true, this.farmer_);
-        const oldFarmerLength = R.length(oldFarmer)
-        console.log( `Number of farmer retire  ${oldFarmerLength}`);
-        for( var i = 0; i < this.farm_.length; i++){
-            if (this.canMakeNewWorker() == true){
+        const oldFarmerLength = R.length(oldFarmer);
+        console.log(`Number of farmer retire  ${oldFarmerLength}`);
+        for (var i = 0; i < this.farm_.length; i++) {
+            if (this.canMakeNewWorker() == true) {
                 var farm = this.farm_[i];
                 var farmer = new Farmer(i, farm, 30);
                 this.farmer_.push(farmer);
                 this.gold_ -= 15;
                 this.corn_ -= 20;
-            }
-            else 
-                break;
+            } else break;
         }
     }
 
-
-    createNewMinerGeneration(){
+    createNewMinerGeneration() {
         var oldMiner = R.filter(x => x.isOld() == true, this.miner_);
-        const oldMinerLength = R.length(oldMiner)
-        console.log( `Number of Miner retire  ${oldMinerLength} `);
-        for( var i = 0; i < this.mine_.length; i++){
-            if (this.canMakeNewWorker() == true){
+        const oldMinerLength = R.length(oldMiner);
+        console.log(`Number of Miner retire  ${oldMinerLength} `);
+        for (var i = 0; i < this.mine_.length; i++) {
+            if (this.canMakeNewWorker() == true) {
                 var mine = this.mine_[i];
                 var miner = new Miner(i, mine, 30);
                 this.miner_.push(miner);
                 this.gold_ -= 15;
                 this.corn_ -= 20;
-            }
-            else
-                break;
+            } else break;
         }
     }
-    
-       trade(A) {
+
+    trade(A) {
         if (Math.random() > 0.5) {
             let shipment = {
                 corn: this.corn_ / 2,
@@ -247,15 +233,17 @@ class City {
     }
 
     showShit() {
-        const numberFarmer = R.length(R.filter(x => x.isAlive_ == true, this.farmer_));
-        const numberMiner = R.length(R.filter(x => x.isAlive_ == true, this.miner_));
+        const numberFarmer = R.length(
+            R.filter(x => x.isAlive_ == true, this.farmer_)
+        );
+        const numberMiner = R.length(
+            R.filter(x => x.isAlive_ == true, this.miner_)
+        );
         if (!this.cityFallen)
             console.log(
                 `${this.name_}: C ${Math.floor(this.corn_)}, G ${Math.floor(
           this.gold_
-        )}, Soldiers ${this.troupes_.validArmySize()}, Farmer ${
-          numberFarmer
-        }, Miner ${numberMiner}`
+        )}, Soldiers ${this.troupes_.validArmySize()}, Farmer ${numberFarmer}, Miner ${numberMiner}`
             );
         else console.log(`${this.name_} has fallen`);
     }
