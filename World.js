@@ -13,7 +13,7 @@ class World {
 	}
 
 	event() {
-		this.worldEvents_.on('WAR', s => this.displayWar(s));
+		this.worldEvents_.on('WAR', () => this.displayWar());
 		this.worldEvents_.on('warEnded', () => {
 			if (this.nCity() > 1) {
 				setTimeout(() => {
@@ -29,7 +29,6 @@ class World {
 							winner.name_
 						} is the only one left and is the only ruler of this world`
 					);
-					process.exit();
 				}, 3000);
 			}
 		});
@@ -44,15 +43,15 @@ class World {
 	}
 
 	nCity() {
-		return R.length(R.filter(x => x.cityFallen == 0, this.city_));
+		return R.length(R.filter(x => x.cityFallen === false, this.city_));
 	}
 
 	randomCity(A) {
-		let c = R.filter(x => x.cityFallen == 0, this.city_)[
+		let c = R.filter(x => x.cityFallen === false, this.city_)[
 			Math.floor(Math.random() * this.nCity())
 		];
-		while (A == c) {
-			c = R.filter(x => x.cityFallen == 0, this.city_)[
+		while (A === c) {
+			c = R.filter(x => x.cityFallen === false, this.city_)[
 				Math.floor(Math.random() * this.nCity())
 			];
 		}
@@ -64,7 +63,7 @@ class World {
 		return R.length(this.divinity_);
 	}
 
-	displayWar(w) {
+	displayWar() {
 		clearInterval(this.gaiaInterval_);
 		console.clear();
 		this.onWar = 1;

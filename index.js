@@ -1,5 +1,5 @@
-const {City} = require('./city');
-const {World} = require('./World');
+const { City } = require('./city');
+const { World } = require('./world');
 
 const Monde = new World();
 const A = new City('Planete A', 'A', Monde);
