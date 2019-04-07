@@ -1,28 +1,25 @@
 
-
 class Farm {
+	constructor() {
+		this.corn_ = 0;
+		this.init();
+	}
 
-    constructor(){
-        this.corn_ = 0; 
-        this.init();
-    }
+	init() {}
 
-    init (){}
+	get corn() {
+		return this.corn_;
+	}
 
+	set corn(quantity) {
+		this.corn_ = this.corn_ + quantity;
+	}
 
-    get corn(){
-        return this.corn_;
-    }
-
-    set corn(quantity){
-        this.corn_ = this.corn_ + quantity;
-    }
-
-    pickUp(){
-        let corn = this.corn_;
-        this.corn_ = 0;
-        return corn; 
-    }
+	pickUp() {
+		const corn = this.corn_;
+		this.corn_ = 0;
+		return corn;
+	}
 }
 
-module.exports = { Farm };
+module.exports = {Farm};

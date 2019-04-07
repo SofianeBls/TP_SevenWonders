@@ -1,30 +1,25 @@
 
-
 class Mine {
+	constructor() {
+		this.gold_ = 0;
+	}
 
-    constructor(){
-        this.gold_ = 0;
-    }
+	init() {
+	}
 
-    init(){
-    }
+	get gold() {
+		return this.gold_;
+	}
 
+	set gold(quantity) {
+		this.gold_ = this.gold_ + quantity;
+	}
 
-    get gold(){
-        return this.gold_;
-    }
-
-    set gold(quantity){
-        this.gold_ = this.gold_ + quantity;
-    }
-    
-    pickUp(){
-        let gold = this.gold_;
-        this.gold_ = 0;
-        return gold; 
-    }
-
+	pickUp() {
+		const gold = this.gold_;
+		this.gold_ = 0;
+		return gold;
+	}
 }
 
-
-module.exports = { Mine };
+module.exports = {Mine};
