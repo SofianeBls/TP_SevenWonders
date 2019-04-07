@@ -38,7 +38,7 @@ class City {
         this.generateWorkerInterval_ = setInterval(() => {
             this.createNewMinerGeneration();
             this.createNewFarmerGeneration();
-           }, (6500));
+           }, (3000));
       
         
         
@@ -80,36 +80,43 @@ class City {
        }
     }
 
-    createNewFarmerGeneration(){
-        const numberFarmerRetreat = R.length(R.filter(x => x.age <= 60, this.farmer_));
-        this.farmer_ = R.filter(x => x.age <= 60, this.farmer_);
-        for( var i = 0; i < this.farm_.length; i++){
-            var farm = this.farm_[i];
-            var farmer = new Farmer(i, farm, 30);
-            this.farmer_.push(farmer);
-            this.gold_ -= 15;
-            this.corn_ -= 20;
-        }
-        console.log(`Last season ${numberFarmerRetreat} take there reatreat `);
-        console.log("Welcome to the new baby famer");
-        this.ascii_.newFarmer();
-        console.log(`Farmer : ${this.farmer_.length}`);
+    canMakeNewWorker(){
+        return (this.gold_ - 15 >= 0) && (this.gold_ - 20 >= 0);
     }
 
-    createNewMinerGeneration(){
-        const numberFarmerRetreat = R.length(R.filter(x => x.age <= 60, this.miner_));
-        this.miner_ = R.filter(x => x.age <= 60, this.miner_);
-        for( var i = 0; i < this.mine_.length; i++){
-            var mine = this.mine_[i];
-            var miner = new Miner(i, mine, 30);
-            this.miner_.push(miner);
-            this.gold_ -= 10;
-            this.corn_ -= 20;
+    createNewFarmerGeneration(){
+        var oldFarmer = R.filter(x => x.isOld() == true, this.farmer_);
+        const oldFarmerLength = R.length(oldFarmer)
+        console.log( `Number of farmer retire  ${oldFarmerLength}`);
+        for( var i = 0; i < this.farm_.length; i++){
+            if (this.canMakeNewWorker() == true){
+                var farm = this.farm_[i];
+                var farmer = new Farmer(i, farm, 30);
+                this.farmer_.push(farmer);
+                this.gold_ -= 15;
+                this.corn_ -= 20;
+            }
+            else 
+                break;
         }
-        console.log(`Last season ${numberFarmerRetreat} take there reatreat `);
-        console.log("Welcome to the new miner : ");
-        this.ascii_.newMiner();
-        console.log(`Miner ${this.miner_.length} `);
+    }
+
+
+    createNewMinerGeneration(){
+        var oldMiner = R.filter(x => x.isOld() == true, this.miner_);
+        const oldMinerLength = R.length(oldMiner)
+        console.log( `Number of Miner retire  ${oldMinerLength} `);
+        for( var i = 0; i < this.mine_.length; i++){
+            if (this.canMakeNewWorker() == true){
+                var mine = this.mine_[i];
+                var miner = new Miner(i, mine, 30);
+                this.miner_.push(miner);
+                this.gold_ -= 15;
+                this.corn_ -= 20;
+            }
+            else
+                break;
+        }
     }
 
 
@@ -174,8 +181,10 @@ class City {
     }
 
     showShit() {
+        const numberFarmer = R.length(R.filter(x => x.isAlive_ == true, this.farmer_));
+        const numberMiner = R.length(R.filter(x => x.isAlive_ == true, this.miner_));
         if (!this.cityFallen)
-            console.log(`${this.name_}: C ${this.corn_}, G ${this.gold_}, Farmer ${this.farmer_.length} Miner ${this.miner_.length}`);
+            console.log(`${this.name_}: C ${this.corn_}, G ${this.gold_}, Farmer ${numberFarmer} Miner ${numberMiner}`);
         else
             console.log(`${this.name_} has fallen`);
     }

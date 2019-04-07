@@ -13,10 +13,10 @@ class Miner extends Personnage {
 
 
     init(){
-        this.gaiaInterval_ = setInterval(() => {
+        this.yieldInterval_ = setInterval(() => {
             this.updateYield();
         }, (1200/365));
-        this.gaiaInterval_ = setInterval(() => {
+        this.workInterval_ = setInterval(() => {
             this.work();
         }, (1200/365));
     }
@@ -27,8 +27,14 @@ class Miner extends Personnage {
     }
 
     work(){
-        let goldFounded = this.yield_ * this.goldFoundMax_;
-        this.mine_.gold = goldFounded; 
+        if (this.isAlive_ == true){
+            let goldFounded = this.yield_ * this.goldFoundMax_;
+            this.mine_.gold = goldFounded;
+        }
+        else {
+            clearInterval(this.yieldInterval_);
+            clearInterval(this.workInterval_);
+        }
     }
 
     get age(){

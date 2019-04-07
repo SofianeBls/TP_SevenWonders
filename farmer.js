@@ -14,13 +14,12 @@ class Farmer extends Personnage {
     }
 
     init(){
-        this.gaiaInterval_ = setInterval(() => {
+        this.yieldInterval_ = setInterval(() => {
             this.updateYield();
-        }, (1200/12.0));
-        this.gaiaInterval_ = setInterval(() => {
+        }, (1200/365));
+        this.workInterval_ = setInterval(() => {
             this.work();
-        }, (1200/12.0));
-
+        }, (1200/365));
     }
 
     updateYield(){
@@ -28,8 +27,14 @@ class Farmer extends Personnage {
     }
 
     work(){
-        let cornPickUp = this.yield_ * this.cornPickUpMax_;
-        this.farm_.corn = cornPickUp;
+        if (this.isAlive_ == true){
+            let cornFounded = this.yield_ * this.cornPickUpMax_;
+            this.farm_.corn = cornFounded;
+        }
+        else {
+            clearInterval(this.yieldInterval_);
+            clearInterval(this.workInterval_);
+        }
     }
     
     get age(){
