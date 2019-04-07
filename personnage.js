@@ -2,17 +2,14 @@
 
 
 class Personnage {
-
-    init (id){
-        this.id = id;
-        this.isAlive = true;
-        this.age = 1;
+    constructor(id){
+        this.id_ = id;
+        this.isAlive_ = true;
+        this.age_ = 1;
         this.gaiaInterval_ = setInterval(() => {
-            age++;
-        }, 1.2);
+            this.age_++;
+        }, 1200);
     }
-
-
 }
 
 

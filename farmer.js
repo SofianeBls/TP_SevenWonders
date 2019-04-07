@@ -9,17 +9,17 @@ class Farmer extends Personnage {
         super(id);
         this.farm_ = farm;
         this.yield_ = 0; 
-        this.cornPickUpMax_ = this.cornPickUpMax_;
+        this.cornPickUpMax_ = cornPickUpMax;
         this.init();
     }
 
-    init(farm){
+    init(){
         this.gaiaInterval_ = setInterval(() => {
             this.updateYield();
-        }, (1.2/365));
+        }, (1200/12.0));
         this.gaiaInterval_ = setInterval(() => {
             this.work();
-        }, (1.2/365));
+        }, (1200/12.0));
 
     }
 
@@ -29,7 +29,11 @@ class Farmer extends Personnage {
 
     work(){
         let cornPickUp = this.yield_ * this.cornPickUpMax_;
-        this.farm_.corn(cornPickUp);
+        this.farm_.corn = cornPickUp;
+    }
+    
+    get age(){
+      this.age_;
     }
 
 }

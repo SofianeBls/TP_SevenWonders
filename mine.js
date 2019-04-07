@@ -17,6 +17,12 @@ class Mine {
     set gold(quantity){
         this.gold_ = this.gold_ + quantity;
     }
+    
+    pickUp(){
+        let gold = this.gold_;
+        this.gold_ = 0;
+        return gold; 
+    }
 
 }
 

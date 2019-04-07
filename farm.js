@@ -1,25 +1,28 @@
 
 
-
 class Farm {
 
     constructor(){
         this.corn_ = 0; 
-        tis.init();
+        this.init();
     }
 
-        init (farmer){}
+    init (){}
 
 
     get corn(){
-        return this.corn;
+        return this.corn_;
     }
-
 
     set corn(quantity){
-        this.corn_ = this.conr_ + quantity;
+        this.corn_ = this.corn_ + quantity;
+    }
+
+    pickUp(){
+        let corn = this.corn_;
+        this.corn_ = 0;
+        return corn; 
     }
 }
-
 
 module.exports = { Farm };
