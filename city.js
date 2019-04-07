@@ -26,7 +26,7 @@ class City {
     }
 
     init() {
-        this.gaiaInterval_ = setInterval(() => {
+        this.pickupGoldandCorn = setInterval(() => {
             this.pickUpCorn();
             this.pickUpGold();
         }, 5000);
