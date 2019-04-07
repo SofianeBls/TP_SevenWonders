@@ -30,19 +30,19 @@ class City {
 
     init() {
         
-        this.gaiaInterval_ = setInterval(() => {
+        this.pickUpCornInterval_ = setInterval(() => {
             this.pickUpCorn();
            }, (5000));
         
         
-        this.gaiaInterval_ = setInterval(() => {
+        this.generateWorkerInterval_ = setInterval(() => {
             this.createNewMinerGeneration();
             this.createNewFarmerGeneration();
            }, (6500));
       
         
         
-        this.gaiaInterval_ = setInterval(() => {
+        this.pickUpGoldInterval_ = setInterval(() => {
             this.pickUpGold();
         }, (5000));
          
@@ -129,14 +129,12 @@ class City {
         for (var i = 0; i < this.farm_.length; i++){
             this.corn_ += this.farm_[i].pickUp();
         }
-        this.ascii_.pickUpCorn();
     }
     
     pickUpGold(){
         for (var i = 0; i < this.mine_.length; i++){
             this.gold_ += this.mine_[i].pickUp();
         }
-        this.ascii_.pickUpGold();
     }
 
     Attack(A) {
