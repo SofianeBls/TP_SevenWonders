@@ -19,7 +19,9 @@ yarn start
 Lance une simulation d'un monde constituer de 7 planètes, les planètes ont respectivement leur or, maïs, troupes, fermiers, mineurs.
 L'IA des planètes et basée sur des probabilités, les planètes ont une certaine chance de faire des échanges, faire des soldats où faire la guerre. La simulation s'arrête quand il ne reste plus qu'une planète.
 
-# Object
+## Classes
+
+# City
 
 La classe permet de gérer une citée (Troupes, Maïs, Or, Fermes, Mines)
 
