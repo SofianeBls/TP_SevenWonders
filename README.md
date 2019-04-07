@@ -2,13 +2,13 @@
 
 ## Running simulation
 
-####First install dependencies ;
+#### First install dependencies ;
 
 ```
 yarn add dependencies
 ```
 
-####then run simulation with :
+#### then run simulation with :
 
 ```
 yarn start
@@ -30,6 +30,10 @@ Attributs:
 - world : Contient le monde auquel elle appartient
 - name : Le nom de cette citée
 - corn, gold, troupes : Son maïs, son Or et ses troupes
+- farmer\_ : l'ensemble des fermiers est contenu dans ce tableau.
+- farm\_ : les fermiers de la ville sont répartis équitablement dans l'ensemble de ces fermes.
+- miner\_ : tableau contenant tous les mineurs de la ville.
+- mine\_ : tableau contenant toutes les mines de la ville. Les mineurs sont répartis équitablement dans ces mines.
 
 Methodes :
 
@@ -41,6 +45,12 @@ Methodes :
 - getShit(s) : permet de recevoir du maïs et de l'or
 - giveShit(s) : permet de faire une offrande à la divinité
 - showShit() : permet d'afficher les biens ainsi que le nombre de soldat, mineurs et fermiers
+
+- creatNewFarmerGeneration : cette méthode détermine le nombre de fermiers qui doivent qui sont à la retraite. Elle utilise la méthode length et filtre de Ramda. Elle crée également la nouvelle génération de fermier.
+
+- createNewMinerGeneration : cette méthode détermine le nombre de fermiers qui doivent qui sont à la retraite. Elle utilise la méthode length et filter de Ramda. Elle crée également la nouvelle génération de fermier.
+- createFarm : cette méthode est appelé à la création de la classe dans la méthode init. Elle crée les instances de ferme et de fermiers.
+- createMine : cette méthode est appelé à la création de la classe dans la méthode init. Elle crée les instances de mine et de mineur.
 
 ## World
 
@@ -125,7 +135,7 @@ Methods :
 - set corn : setter pour modifier la quantité de ressource.
 - get corn : getter pour obtenir la quantité de ressource.
 
-## personnage
+## Personnage
 
 Attributs:
 
@@ -193,21 +203,3 @@ par le mineur en multipliant sont le rendement par la quantité maximum qu'il pe
 - updateYield : mise à jour de la valeur du rendement. La variable yield\_ prend une valeur aléatoire comprise entre [0 - 1].
 
 - get age : getter pour obtenir l'age du mineur.
-
-## City
-
-Attributs:
-
-- farmer\_ : l'ensemble des fermiers est contenu dans ce tableau.
-- farm\_ : les fermiers de la ville sont répartis équitablement dans l'ensemble de ces fermes.
-- miner\_ : tableau contenant tous les mineurs de la ville.
-- mine\_ : tableau contenant toutes les mines de la ville. Les mineurs sont répartis équitablement dans ces mines.
--
-
-Methods :
-
-- creatNewFarmerGeneration : cette méthode détermine le nombre de fermiers qui doivent qui sont à la retraite. Elle utilise la méthode length et filtre de Ramda. Elle crée également la nouvelle génération de fermier.
-
-- createNewMinerGeneration : cette méthode détermine le nombre de fermiers qui doivent qui sont à la retraite. Elle utilise la méthode length et filter de Ramda. Elle crée également la nouvelle génération de fermier.
-- createFarm : cette méthode est appelé à la création de la classe dans la méthode init. Elle crée les instances de ferme et de fermiers.
-- createMine : cette méthode est appelé à la création de la classe dans la méthode init. Elle crée les instances de mine et de mineur.

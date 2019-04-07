@@ -33,7 +33,6 @@ class City {
             this.createNewMinerGeneration();
             this.createNewFarmerGeneration();
         }, 3000);
-
         this.createFarm();
         this.createMine();
         this.divinity_.init();
@@ -41,11 +40,11 @@ class City {
         this.divinity_.worldEvents.on("blessing", shit => this.getShit(shit));
         this.IA = setInterval(() => {
             if (!this.cityFallen) {
-                if (Math.random() > 0.5) this.makeSoldiers(1000);
+                if (Math.random() > 0.5) this.makeSoldiers(10000);
                 else if (Math.random() > 0.7) this.giveShit();
                 else if (Math.random() > 0.75 && !this.world_.onWar)
                     this.trade(this.world_.randomCity(this));
-                else if (Math.random() > 0.79 && !this.world_.onWar)
+                else if (Math.random() > 0.9 && !this.world_.onWar)
                     this.Attack(this.world_.randomCity(this));
             } else clearInterval(this.IA);
         }, 1200);
@@ -91,7 +90,6 @@ class City {
     createNewFarmerGeneration() {
         var oldFarmer = R.filter(x => x.isOld() == true, this.farmer_);
         const oldFarmerLength = R.length(oldFarmer);
-        console.log(`Number of farmer retire  ${oldFarmerLength}`);
         for (var i = 0; i < this.farm_.length; i++) {
             if (this.canMakeNewWorker() == true) {
                 var farm = this.farm_[i];
@@ -106,7 +104,6 @@ class City {
     createNewMinerGeneration() {
         var oldMiner = R.filter(x => x.isOld() == true, this.miner_);
         const oldMinerLength = R.length(oldMiner);
-        console.log(`Number of Miner retire  ${oldMinerLength} `);
         for (var i = 0; i < this.mine_.length; i++) {
             if (this.canMakeNewWorker() == true) {
                 var mine = this.mine_[i];
@@ -207,7 +204,9 @@ class City {
             console.log(
                 `${this.name_} has no more valid soldiers, ${this.name_} has fallen.\n${
           A.name_
-        } stole ${this.gold_} gold and ${this.corn_} corn from ${this.name_}.`
+        } stole ${Math.floor(this.gold_)} gold and ${Math.floor(
+          this.corn_
+        )} corn from ${this.name_}.`
             );
             A.getShit({
                 corn: this.corn_,

@@ -28,6 +28,7 @@ class World {
               winner.name_
             } is the only one left and is the only ruler of this world`
                     );
+                    process.exit();
                 }, 3000);
             }
         });
