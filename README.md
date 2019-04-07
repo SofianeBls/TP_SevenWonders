@@ -42,7 +42,7 @@ Attributs:
 - age : L'age du personnage.
 - isAlive : variable d'état indiquant si l'utilisateur est en vie. 
 - reatreatInterval : interval mise en place pour vérifier si l'utilisateur à atteint l'age de la retraite. 
-
+- gaiaInterval : interval qui met à jour l'age de l'utilisateur à interval régulier. 
 
 Methods : 
 
