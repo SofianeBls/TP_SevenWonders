@@ -8,7 +8,6 @@ class Divinity {
         this.worldEvents_ = new EventEmitter();
         this.timeFactor_ = timeFactor || 600;
     }
-  
 
     init() {
         this.gaiaInterval_ = setInterval(() => {
@@ -22,10 +21,6 @@ class Divinity {
                     corn: 10 * this.corn,
                     gold: 10 * this.gold
                 });
-            }
-
-            if (Math.random() > 0.99) {
-                this.worldEvents.emit("retribution", Math.floor(1000 * Math.random()));
             }
         }, this.timeFactor);
     }

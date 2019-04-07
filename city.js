@@ -84,7 +84,7 @@ class City {
     }
 
     canMakeNewWorker() {
-        return this.gold_ - 15 >= 0 && this.gold_ - 20 >= 0;
+        return this.corn_ > 20 && this.gold_ > 15;
     }
 
     createNewFarmerGeneration() {
@@ -144,11 +144,13 @@ class City {
                 ?
                 (this.corn_ = this.corn_ + s.corn) :
                 (this.gold_ = this.gold_ + s.gold);
-            k
-                ?
-                (this.gold_ = this.gold_ - s.corn) :
-                (this.corn_ = this.corn_ - s.gold);
-            if (Math.random() > 0.1) A.giveShit(shipment);
+            if (Math.random() > 0.1) {
+                k
+                    ?
+                    (this.gold_ = this.gold_ - s.corn) :
+                    (this.corn_ = this.corn_ - s.gold);
+                A.giveShit(shipment);
+            }
         } else {
             A.giveShit(s);
         }
@@ -225,10 +227,10 @@ class City {
     }
 
     giveShit() {
-        this.divinity_.offeringCorn(this.corn_);
-        this.divinity_.offeringGold(this.gold_);
-        this.corn_ = 0;
-        this.gold_ = 0;
+        this.divinity_.offeringCorn(this.corn_ / 2);
+        this.divinity_.offeringGold(this.gold_ / 2);
+        this.corn_ = this.corn_ / 2;
+        this.gold_ = this.gold_ / 2;
     }
 
     showShit() {

@@ -43,7 +43,7 @@ Methodes :
 - makeSoldiers(n) : permet d'ajouter des soldats a ces troupes a partir d'or et de maïs
 - Attack(A) : permet d'attacker la citée A, Les deux citée combatte jusqu'a ce que l'une des deux citées n'as plus de troupes valides et que l'une d'entre elle tombe
 - getShit(s) : permet de recevoir du maïs et de l'or
-- giveShit(s) : permet de faire une offrande à la divinité
+- giveShit() : permet de faire une offrande à la divinité( la moitié de ces golds et maïs) permet de renforcer les benediction de la divinité
 - showShit() : permet d'afficher les biens ainsi que le nombre de soldat, mineurs et fermiers
 
 - creatNewFarmerGeneration : cette méthode détermine le nombre de fermiers qui doivent qui sont à la retraite. Elle utilise la méthode length et filtre de Ramda. Elle crée également la nouvelle génération de fermier.
@@ -203,3 +203,7 @@ par le mineur en multipliant sont le rendement par la quantité maximum qu'il pe
 - updateYield : mise à jour de la valeur du rendement. La variable yield\_ prend une valeur aléatoire comprise entre [0 - 1].
 
 - get age : getter pour obtenir l'age du mineur.
+
+## Divinity
+
+Chaque ville possède ça divinité en lui faisant des offrandes on renforce ça bénédiction.

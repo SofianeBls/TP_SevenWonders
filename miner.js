@@ -9,12 +9,10 @@ class Miner extends Personnage {
         this.init();
     }
 
-
-    init(){
+    init() {
         this.yieldInterval_ = setInterval(() => {
             this.updateYield();
-        }, (1200/365));
-        this.workInterval_ = setInterval(() => {
+            this.work();
         }, 1200 / 365);
     }
 
@@ -22,12 +20,11 @@ class Miner extends Personnage {
         this.yield_ = Math.random();
     }
 
-    work(){
-        if (this.isAlive_ == true){
+    work() {
+        if (this.isAlive_ == true) {
             let goldFounded = this.yield_ * this.goldFoundMax_;
             this.mine_.gold = goldFounded;
-        }
-        else {
+        } else {
             clearInterval(this.yieldInterval_);
             clearInterval(this.workInterval_);
         }

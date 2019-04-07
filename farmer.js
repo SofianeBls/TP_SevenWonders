@@ -9,25 +9,22 @@ class Farmer extends Personnage {
         this.init();
     }
 
-    init(){
+    init() {
         this.yieldInterval_ = setInterval(() => {
             this.updateYield();
-        }, (1200/365));
-        this.workInterval_ = setInterval(() => {
             this.work();
-        }, (1200/365));
+        }, 1200 / 365);
     }
 
     updateYield() {
         this.yield_ = Math.random();
     }
 
-    work(){
-        if (this.isAlive_ == true){
+    work() {
+        if (this.isAlive_ == true) {
             let cornFounded = this.yield_ * this.cornPickUpMax_;
             this.farm_.corn = cornFounded;
-        }
-        else {
+        } else {
             clearInterval(this.yieldInterval_);
             clearInterval(this.workInterval_);
         }
