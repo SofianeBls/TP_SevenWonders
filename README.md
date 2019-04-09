@@ -2,13 +2,13 @@
 
 ## Lancer la Simulation
 
-#### installer les dependances ;
+#### Installation des dépendances :
 
 ```
 yarn add dependencies
 ```
 
-#### Démarer la simulation :
+#### Démarrage de la simulation :
 
 ```
 yarn start
@@ -16,8 +16,9 @@ yarn start
 
 # La simulation
 
-Lance une simulation d'un monde constituer de 7 planètes, les planètes ont respectivement leur or, maïs, troupes, fermiers, mineurs.
-L'IA des planètes et basée sur des probabilités, les planètes ont une certaine chance de faire des échanges, faire des soldats où faire la guerre. La simulation s'arrête quand il ne reste plus qu'une planète.
+Lance une simulation d'un monde constituer de 7 planètes.
+Les planètes ont respectivement leur or, maïs, troupes, fermiers, mineurs.
+L'IA des planètes est basée sur des probabilités, les planètes ont une certaine chance de faire des échanges, faire des soldats où faire la guerre. La simulation s'arrête quand il ne reste plus qu'une planète.
 
 ## Classes
 
@@ -27,9 +28,9 @@ La classe permet de gérer une citée (Troupes, Maïs, Or, Fermes, Mines)
 
 Attributs:
 
-- world : contiens le monde auquel elle appartient.
-- name : Le nom de cette cité
-- corn, gold, troupes : son maïs, son Or et ses troupes
+- world : contient le monde auquel elle appartient.
+- name : nom de la cité.
+- corn, gold, troupes : son maïs, son or et ses troupes.
 - farmer\_ : l'ensemble des fermiers est contenu dans ce tableau.
 - farm\_ : les fermiers de la ville sont répartis équitablement dans l'ensemble de ces fermes.
 - miner\_ : tableau contenant tous les mineurs de la ville.
@@ -37,14 +38,14 @@ Attributs:
 
 Méthodes :
 
-- init(): Permet de gérer les évènements lier à la divinité ( blessing et favor)
-- IA : intelligence artificielle simpliste basée sur l'aléatoire afin de gérer les choix de la cité et utilisée toutes les fonctions implémentées
-- trade() et onTrade(): permet de gérer les échanges d'or et de maïs a chaque trajet il y a 10% de chances que la cargaison disparaisse
-- makeSoldiers(n) : permet d'ajouter des soldats à ces troupes a partir d'or et de maïs
-- Attack(A) : permet d'attaquer la citée A, Les deux citée combatte jusqu'a ce que l'une des deux citées n'as plus de troupes valides et que l'une d'entre elle tombe
-- getShit(s) : permet de recevoir du maïs et de l'or
-- giveShit() : permet de faire une offrande à la divinité( la moitié de ces golds et maïs) permet de renforcer les bénédictions de la divinité
-- showShit() : permet d'afficher les biens ainsi que le nombre de soldats, mineurs et fermiers
+- init(): permet de gérer les évènements lier à la divinité ( blessing et favor).
+- IA : intelligence artificielle simpliste basée sur l'aléatoire afin de gérer les choix de la cité et utilisée toutes les fonctions implémentées.
+- trade() et onTrade(): permet de gérer les échanges d'or et de maïs a chaque trajet il y a 10% de chances que la cargaison disparaisse.
+- makeSoldiers(n) : permet d'ajouter des soldats à ces troupes a partir d'or et de maïs.
+- Attack(A) : permet d'attaquer la citée A, Les deux citée combatte jusqu'a ce que l'une des deux citées n'as plus de troupes valides et que l'une d'entre elle tombe.
+- getShit(s) : permet de recevoir du maïs et de l'or.
+- giveShit() : permet de faire une offrande à la divinité( la moitié de ces golds et maïs) permet de renforcer les bénédictions de la divinité.
+- showShit() : permet d'afficher les biens ainsi que le nombre de soldats, mineurs et fermiers.
 
 - creatNewFarmerGeneration : cette méthode détermine le nombre de fermiers qui doivent qui sont à la retraite. Elle utilise la méthode length et filtre de Ramda. Elle crée également la nouvelle génération de fermier.
 
@@ -60,44 +61,44 @@ Attributs :
 
 - years : represente l'année du monde simulé.
 - city\_ : contiens la liste des villes présente dans ce monde.
-- divinity\_ : liste des divinités dans ce monde
-- onWar : booléen pour gérer l'affichage en cas de guerre
+- divinity\_ : liste des divinités dans ce monde.
+- onWar : booléen pour gérer l'affichage en cas de guerre.
 
 Méthodes :
 
-- event() : permet de gérer l'affichage en cas de guerre
-- init() : Affichage par défaut quand il n'y a pas de guerre
-- nCity() : retourne le nombre de cités encore fonctionnel
-- randomCity(A) : retourne une cité aléatoire différente de la cité A passer en attribut
-- nDivinity() : retourne le nombre de divinités
-- showShit() : permet d'afficher
-- addCity(A) et addDivinity(A) : permet de rajouter les cités dans le tableau présent dans les attributs
+- event() : permet de gérer l'affichage en cas de guerre.
+- init() : Affichage par défaut quand il n'y a pas de guerre.
+- nCity() : retourne le nombre de cités encore fonctionnel.
+- randomCity(A) : retourne une cité aléatoire différente de la cité A passer en attribut.
+- nDivinity() : retourne le nombre de divinités.
+- showShit() : permet d'afficher.
+- addCity(A) et addDivinity(A) : permet de rajouter les cités dans le tableau présent dans les attributs.
 
 ##Troupes
 
-La classe troupes permet de gérer l'armée d'une ville
+La classe troupes permet de gérer l'armée d'une ville.
 
 Attributs :
 
-- soldats\_ : Tableau contenant tout les soldats
-- price_g et price_c : le prix de créer des soldats
+- soldats\_ : tableau contenant tout les soldats.
+- price_g et price_c : le prix de création des soldats.
 
-Methodes :
+Méthodes :
 
-- init() : permet de vérifier l'age des soldats et mettre à la retraite les soldats trop vieux
-- addSoldier() : permet d'ajouter un soldat aux troupes
-- validArmySize() : retourne le nombre de soldats prêt à combattre (non blessé)
-- Army() : retourne un tableau contenant tout les soldats prêt à combattre
-- War(nbOfSoldier) : envoie les soldats à la guerre ils ont 1 chance sur deux de mourir ou être blesse
+- init() : permet de vérifier l'age des soldats et mettre à la retraite les soldats trop vieux.
+- addSoldier() : permet d'ajouter un soldat aux troupes.
+- validArmySize() : retourne le nombre de soldats prêt à combattre (non blessé).
+- Army() : retourne un tableau contenant tout les soldats prêt à combattre.
+- War(nbOfSoldier) : envoie les soldats à la guerre ils ont 1 chance sur deux de mourir ou être blessé.
 
 #Soldats
 
-Classe représentant un Soldat
+Classe représentant un Soldat.
 
 Attributs :
 
-- age : age du Soldat initialiser a 18
-- injured, died : booléen représentant s'il sont mort ou blessé
+- age : age du Soldat initialiser a 18.
+- injured, died : booléen représentant s'ils sont morts ou blessés.
 
 Methodes :
 
